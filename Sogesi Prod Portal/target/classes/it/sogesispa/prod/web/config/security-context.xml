@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<security:ldap-server id="contextSource" url="ldap://srvdc03.schultze.locale:389" manager-dn="cn=administrator,cn=Users,dc=schultze,dc=locale" manager-password="pallino"/>
+	<security:authentication-manager>
+		<!-- <security:authentication-provider>
+			<security:user-service>
+				<security:user name="marco" authorities="admin" password="Filippo11" 
+					/> 
+				<security:user name="pippo" authorities="admin"
+					password="password" />
+			</security:user-service> 
+		</security:authentication-provider>
+			<security:authentication-provider> <security:jdbc-user-service data-source-ref="dataSource" /> 
+			</security:authentication-provider> -->
+			<!-- <security:authentication-provider ref="activeDirectoryAuthenticationProvider">  -->
+			
+			<security:authentication-provider ref="ldapAuthProvider">
+			</security:authentication-provider>
+
+	</security:authentication-manager>
+
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="favicon.ico" access="permitAll" />
+		<security:intercept-url pattern="/logout"
+			access="permitAll" />
+		<security:intercept-url pattern="/static/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/dynamic/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
+		<security:intercept-url pattern="/ecolab"
+			access="permitAll" />
+		<security:intercept-url pattern="/productivity"
+			access="permitAll" />
+		<security:intercept-url pattern="/main"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getstabilimenti"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getperiodicita"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getmachines"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getlinee"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/gettipimacchina"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getimpianti"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getmacchine"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getgroups"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getstabs"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getprodstabs"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/charts"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/getriepilogopianificazione"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/report/stampaElencoAttivita"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/report/stampaPianoSettimanale"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/report/stampaGiornoMacchina"
+			access="isAuthenticated()" />
+
+
+		<security:intercept-url pattern="/lista-attivita"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/new-attivita"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/attivita"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/lista-pianificazioni"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/dettaglio-pianificazione"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/consumo-detergenti"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/consumo-detergenti-charts"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/ore-lavorate"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/ore-lavorate-charts"
+			access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/**" access="denyAll" />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true" />
+		<security:logout logout-success-url="/logout" />
+		<security:access-denied-handler
+			error-page="/403" />
+	</security:http>
+	<!--
+	<bean id="activeDirectoryAuthenticationProvider"
+		class="org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider">
+		<constructor-arg value="schultze.locale" />
+		<constructor-arg value="ldap://SRVDC03.schultze.locale" />
+	</bean>
+	 -->
+	 <!-- using bean-based configuration here to set the DefaultLdapAuthoritiesPopulater with 
+		ignorePartialResultsException=true.  This is a known Spring/AD issue and a workaround for it -->
+	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<constructor-arg>
+			<!-- the bind authenticator will first lookup the user using the service account credentials, then 
+				 attempt to bind the user with their password once found -->
+			<bean id="bindAuthenticator" class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<constructor-arg ref="contextSource" />
+				<property name="userSearch" ref="userSearch" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+				<constructor-arg ref="contextSource" />
+				<constructor-arg value="DC=schultze,DC=locale" /> <!-- group search base -->
+				<!-- <property name="defaultRole" value="ROLE_USER" /> 
+					You can add a default role to everyone if needed -->
+				<property name="searchSubtree" value="true" />
+				<property name="ignorePartialResultException" value="true" />
+				<property name="groupSearchFilter" value="(member={0})" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="userSearch" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<constructor-arg index="0" value="DC=schultze,DC=locale" />
+		<constructor-arg index="1" value="(sAMAccountName={0})" />
+		<constructor-arg index="2" ref="contextSource" />
+		<property name="searchSubtree" value="true" />
+	</bean>
+	<!--  end Web Security -->
+</beans>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd">
+
+	<bean id="xmlScheduledTasks" class="it.sogesispa.prod.web.scheduler.Scheduler">
+		<property name="giorniDaPianificare">
+			<value>365</value>
+		</property>
+		<property name="giorniDaOggi">
+			<value>1</value>
+		</property>
+		<property name="excludedDate">
+			<array value-type="java.lang.String">
+				<value>25-12</value>
+				<value>26-12</value>
+				<value>08-12</value>
+				<value>01-01</value>
+				<value>06-01</value>
+				<value>15-08</value>
+				<value>01-11</value>
+				<value>01-05</value>
+				<value>02-06</value>
+				<value>25-04</value>
+			</array>
+		</property>
+	</bean>
+
+	<task:scheduler id="taskScheduler" pool-size="1" />
+
+	<task:scheduled-tasks>
+<!-- EVERY MIDNIGHT	 -->
+		<task:scheduled ref="xmlScheduledTasks" method="fixedDelayTask" cron="0 0 * * * ?"  />
+		
+<!-- EVERY HOUR AT 0 MINUTES 		
+<task:scheduled ref="xmlScheduledTasks" method="fixedDelayTask" cron="0 * * * * ?"  /> 
+-->
+	<!--  
+		<task:scheduled ref="xmlScheduledTasks" method="fixedDelayTask"
+			fixed-delay="40000" /> -->
+			
+			
+	</task:scheduled-tasks>
+
+</beans>
