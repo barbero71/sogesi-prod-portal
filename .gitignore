@@ -28,4 +28,4 @@ logs/
 Thumbs.db
 
 # Docker build artifacts
-sogesi-prod-portal.tar
+*.tar
