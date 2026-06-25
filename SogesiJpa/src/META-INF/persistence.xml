@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="SogesiJpa">
+		<class>it.sogesispa.prod.web.models.jpa.PaAttivita</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaComponenti</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaCompImpTMacchina</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaImpianti</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaImpiantoTMacchina</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaLinea</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaMacchine</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaPeriodicita</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaPianificazioni</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaPriorita</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaProfili</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaRuoli</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaRuoliProfili</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaTipiMacchina</class>
+		<class>it.sogesispa.prod.web.models.jpa.PaUtenti</class>
+		<class>it.sogesispa.prod.web.models.jpa.TPlant</class>
+		<class>it.sogesispa.prod.web.models.jpa.TUser</class>
+	</persistence-unit>
+	
+	
+	
+    <persistence-unit name="test">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider> 
+        <properties>
+	        <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" />
+	        <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	        <property name="hibernate.connection.password" value="SOGESI" />
+	        <property name="hibernate.connection.username" value="SOGESI" />
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" /> 
+	      <!--   <property name="hibernate.default_catalog" value="amazon_mws_ws" /> -->
+	        <property name="show_sql" value="true"/>   
+        </properties> 
+    </persistence-unit>
+	
+	
+    <persistence-unit name="production_test">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider> 
+        <properties>
+	        <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" />
+	        <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.1.231:1521:orcl" />
+	        <property name="hibernate.connection.username" value="sogesi" />
+	        <property name="hibernate.connection.password" value="manager" />
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" /> 
+	      <!--   <property name="hibernate.default_catalog" value="amazon_mws_ws" /> -->
+	        <property name="show_sql" value="true"/>   
+        </properties> 
+    </persistence-unit>
+	
+</persistence>
