@@ -12,7 +12,7 @@
       <input type="checkbox" name="stab" value="1" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '1')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Perugia</label><br>
       <input type="checkbox" name="stab" value="2" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '2')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Ponsacco</label><br>
       <input type="checkbox" name="stab" value="3" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '3')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Stroncone</label><br>
-      <input type="checkbox" name="stab" value="4" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '4')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Cannara</label><br>
+<!-- <input type="checkbox" name="stab" value="4" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '4')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Cannara</label><br> -->
       <input type="checkbox" name="stab" value="5" ${fn:contains(sessionScope.consumoDetergentiSessionFilter.stabId, '5')||sessionScope.consumoDetergentiSessionFilter.stabId=='all'?"checked='true'":""}><label for="stab">Erbusco</label><br>
       </div>
     </div>

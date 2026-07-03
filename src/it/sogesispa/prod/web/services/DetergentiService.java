@@ -69,6 +69,7 @@ public class DetergentiService {
 					consumoDetergentiSessionFilter.getTxtDateFrom(), consumoDetergentiSessionFilter.getTxtDateTo());
 			ret.put(nomeStabilimento, l);
 		}
+		/* CANNARA - stabilimento dismesso, ora magazzino, disattivato
 		if (consumoDetergentiSessionFilter.getStabId() != null
 				&& (consumoDetergentiSessionFilter.getStabId().equals("all")
 						|| consumoDetergentiSessionFilter.getStabId().contains("4"))) {
@@ -78,6 +79,7 @@ public class DetergentiService {
 					consumoDetergentiSessionFilter.getTxtDateFrom(), consumoDetergentiSessionFilter.getTxtDateTo());
 			ret.put(nomeStabilimento, l);
 		}
+		*/
 		if (consumoDetergentiSessionFilter.getStabId() != null
 				&& (consumoDetergentiSessionFilter.getStabId().equals("all")
 						|| consumoDetergentiSessionFilter.getStabId().contains("5"))) {
@@ -179,6 +181,7 @@ public class DetergentiService {
 					consumoDetergentiChartSessionFilter);
 			ret.add(l);
 		}
+		/* CANNARA - stabilimento dismesso, ora magazzino, disattivato
 		if (consumoDetergentiChartSessionFilter.getStabId() != null
 				&& (consumoDetergentiChartSessionFilter.getStabId().equals("all")
 						|| consumoDetergentiChartSessionFilter.getStabId().contains("4"))) {
@@ -188,6 +191,7 @@ public class DetergentiService {
 					consumoDetergentiChartSessionFilter);
 			ret.add(l);
 		}
+		*/
 		if (consumoDetergentiChartSessionFilter.getStabId() != null
 				&& (consumoDetergentiChartSessionFilter.getStabId().equals("all")
 						|| consumoDetergentiChartSessionFilter.getStabId().contains("5"))) {

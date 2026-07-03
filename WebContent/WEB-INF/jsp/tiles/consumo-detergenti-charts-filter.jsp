@@ -17,9 +17,9 @@
 				name="stab" value="3"
 				${fn:contains(sessionScope.consumoDetergentiChartSessionFilter.stabId, '3')||sessionScope.consumoDetergentiChartSessionFilter.stabId=='all'?"checked='true'":""}><label
 				for="stab">Stroncone</label><br>
-			<input type="checkbox" name="stab" value="4" ${fn:contains(sessionScope.consumoDetergentiChartSessionFilter.stabId, '4')||sessionScope.consumoDetergentiChartSessionFilter.stabId=='all'?"checked='true'":""}>
-			<label for="stab">Cannara</label><br>
-			
+			<!-- <input type="checkbox" name="stab" value="4" ${fn:contains(sessionScope.consumoDetergentiChartSessionFilter.stabId, '4')||sessionScope.consumoDetergentiChartSessionFilter.stabId=='all'?"checked='true'":""}>
+			<label for="stab">Cannara</label><br> -->
+
 			<input type="checkbox" name="stab" value="5" ${fn:contains(sessionScope.consumoDetergentiChartSessionFilter.stabId, '5')||sessionScope.consumoDetergentiChartSessionFilter.stabId=='all'?"checked='true'":""}>
 			<label for="stab">Erbusco</label><br>
 			

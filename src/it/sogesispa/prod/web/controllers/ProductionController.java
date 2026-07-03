@@ -314,11 +314,16 @@ public class ProductionController {
 			break;
 			
 		case "10001":
+			// CANNARA - stabilimento dismesso, ora magazzino, disattivato
+			model.addAttribute("stabCan", 0);
+			break;
+
+			/* INIZIO CANNARA (disattivato)
 			if ((usr.getAuthLevel() & 16) > 0) // CANNARA
 				model.addAttribute("stabCan", 1);
 			else
 				model.addAttribute("stabCan", 0);
-			
+
 			oreCan.setOreTotali(productionService.getOreGroup("10001", dFrom, dTo, 999, "999"));
 			oreCan.setOreTotaliDip(productionService.getOreGroup("10001", dFrom, dTo, 999, "002"));
 			oreCan.setOreTotaliSom(productionService.getOreGroup("10001", dFrom, dTo, 999, "202"));
@@ -374,7 +379,8 @@ public class ProductionController {
 			
 			model.addAttribute("oreCan", oreCan);
 			break;
-			
+			FINE CANNARA */
+
 		case "10003":
 			if ((usr.getAuthLevel() & 8) > 0) // BOLOGNA
 				model.addAttribute("stabBol", 1);
@@ -510,10 +516,8 @@ public class ProductionController {
 				model. addAttribute("stabBol", 1);
 			else
 				model.addAttribute("stabBol", 0);
-			if ((usr.getAuthLevel() & 16) > 0) // CANNARA
-				model. addAttribute("stabCan", 1);
-			else
-				model.addAttribute("stabCan", 0);
+			// CANNARA - stabilimento dismesso, ora magazzino, disattivato
+			model.addAttribute("stabCan", 0);
 
 			orePon.setOreTotali(productionService.getOreGroup("10005", dFrom, dTo, 999, "999"));
 			orePon.setOreTotaliDip(productionService.getOreGroup("10005", dFrom, dTo, 999, "002"));

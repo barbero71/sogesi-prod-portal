@@ -50,13 +50,13 @@ function chkUrl() {
 							<li><a href="main">Home</a></li>
 							<li><a href="ecolab">Produzione</a></li>
 							<li><a href="charts">Grafici Produzione</a></li>
-							<li><a href="productivity">Produttivit&agrave;</a></li>
-							<li><a href="lista-attivita">Lista Attivit&agrave;</a></li>
-							<li><a href="lista-pianificazioni">Pianificazione Attivit&agrave;</a></li>
-							<li><a href="ore-lavorate">Ore</a></li>
-							<li><a href="ore-lavorate-charts">Grafici Ore</a></li>
+							<!-- <li><a href="productivity">Produttivit&agrave;</a></li> -->
+							<!-- <li><a href="ore-lavorate">Ore</a></li> -->
+							<!-- <li><a href="ore-lavorate-charts">Grafici Ore</a></li> -->
 							<li><a href="consumo-detergenti">Consumi</a></li>
 							<li><a href="consumo-detergenti-charts">Grafici Consumi</a></li>
+							<li><a href="lista-attivita">Lista Attivit&agrave;</a></li>
+							<li><a href="lista-pianificazioni">Pianificazione Attivit&agrave;</a></li>
 					</menu>
 				</td>
 			</tr>

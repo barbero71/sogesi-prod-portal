@@ -634,7 +634,8 @@ public class ProductionDAO {
 
 	public List<Plants> getPlantList(User usr) throws Exception {
 
-		return jdbc.query("SELECT * FROM T_PLANTS", new RowMapper<Plants>() {
+		// PLANT_ID 16 = Cannara, stabilimento dismesso, ora magazzino, escluso dai filtri
+		return jdbc.query("SELECT * FROM T_PLANTS WHERE PLANT_ID <> 16", new RowMapper<Plants>() {
 
 			public Plants mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Plants plant = new Plants();

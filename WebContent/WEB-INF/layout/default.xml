@@ -31,7 +31,7 @@
 		<put-attribute name="area-logo" value=" " />
 		<put-attribute name="filter" value="/WEB-INF/jsp/tiles/spacer.jsp" />
 		<put-attribute name="main-content" value="charts_realtime.jsp" />
-		<put-attribute name="version" value="Rel. 4.8.0 del 24/06/2026" />
+		<put-attribute name="version" value="Rel. 4.8.1 del 03/07/2026" />
 	</definition>
 	<definition name="main" extends="home.base">
 		<put-attribute name="title" value="So.Ge.Si. SpA - Portale Produzione" />

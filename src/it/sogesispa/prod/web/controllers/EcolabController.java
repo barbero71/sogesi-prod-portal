@@ -237,8 +237,8 @@ public class EcolabController {
 			}
 		}
 		
-		/* INIZIO MODIFICHE CANNARA */
-		
+		/* INIZIO MODIFICHE CANNARA - stabilimento dismesso, ora magazzino, disattivato
+
 		if ((usr.getAuthLevel() & 16) > 0
 				&& (liststabId != null && (liststabId.equals("999") || liststabId.contains("16")))) // CANNARA:
 																									// gruppi
@@ -263,8 +263,8 @@ public class EcolabController {
 				model.addAttribute("CanProdutt", 0);
 			}
 		}
-		
-		/* FINE MODIFICHE CANNARA */
+
+		FINE MODIFICHE CANNARA */
 		
 		/* INIZIO MODIFICHE ERBUSCO */
 		

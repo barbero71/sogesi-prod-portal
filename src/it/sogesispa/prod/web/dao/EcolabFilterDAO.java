@@ -32,7 +32,8 @@ public class EcolabFilterDAO
 	public List<Plants> getPlantList(User usr) throws Exception
 	{
 		
-			return jdbc.query("SELECT * FROM T_PLANTS WHERE ECOLAB = 1", new RowMapper<Plants>() {
+			// PLANT_ID 16 = Cannara, stabilimento dismesso, ora magazzino, escluso dai filtri
+			return jdbc.query("SELECT * FROM T_PLANTS WHERE ECOLAB = 1 AND PLANT_ID <> 16", new RowMapper<Plants>() {
 
 				public Plants mapRow(ResultSet rs, int rowNum)
 						throws SQLException
@@ -58,7 +59,8 @@ public class EcolabFilterDAO
 		{
 			if (plant.equals("999"))
 			{
-				sSql = "SELECT * FROM T_GROUPS";
+				// PLANT_ID 16 = Cannara, stabilimento dismesso, ora magazzino, escluso dai filtri
+				sSql = "SELECT * FROM T_GROUPS WHERE TI_NUMBER <> 16";
 			} else
 			{
 				sSql = "SELECT * FROM T_GROUPS WHERE TI_NUMBER = " + plant;
@@ -67,7 +69,7 @@ public class EcolabFilterDAO
 
 		else
 		{
-			sSql = "SELECT * FROM T_GROUPS";
+			sSql = "SELECT * FROM T_GROUPS WHERE TI_NUMBER <> 16";
 		}
 		
 		return jdbc.query(sSql, new RowMapper<EcolabGroups>() {
@@ -96,7 +98,8 @@ public class EcolabFilterDAO
  		{
   			if(plant.equals("999") && !group.equals("999"))
   			{
-  				sSql = "SELECT * FROM VW_MACHINES WHERE GR_Number = " + group;	  				
+  				// PLANT_ID 16 = Cannara, stabilimento dismesso, ora magazzino, escluso dai filtri
+  				sSql = "SELECT * FROM VW_MACHINES WHERE GR_Number = " + group + " AND TI_Number <> 16";
   			}
   			else if (group.equals("999") && !plant.equals("999"))
   			{
@@ -104,12 +107,12 @@ public class EcolabFilterDAO
   			}
   			else
   			{
-  				sSql = "SELECT * FROM VW_MACHINES";
+  				sSql = "SELECT * FROM VW_MACHINES WHERE TI_Number <> 16";
   			}
   		}
   		else if (group.equals("999") && plant.equals("999"))
   		{
-  			sSql = "SELECT * FROM VW_MACHINES";
+  			sSql = "SELECT * FROM VW_MACHINES WHERE TI_Number <> 16";
   		}
   		else
   		{

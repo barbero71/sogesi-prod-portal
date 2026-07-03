@@ -107,10 +107,12 @@ public class ChartsController {
 		List<ChartTable> chartTableList = new ArrayList<ChartTable>();
 		
 		
-		if ((usr != null && (usr.getAuthLevel() & 1) > 0) || (externalstabid != null && externalstabid == 1)) {  // PONSACCO 
+		if (((usr != null && (usr.getAuthLevel() & 1) > 0) || (externalstabid != null && externalstabid == 1))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("1"))) {  // PONSACCO
 
 			ChartTable chartTable = chartsService.getChartTable(
-										1, 
+										1,
 										unitaMisura,
 										chartSessionFilter.getTxtDateFrom(),
 										chartSessionFilter.getTxtDateTo()
@@ -121,10 +123,12 @@ public class ChartsController {
 
 		
 
-		if ((usr != null && (usr.getAuthLevel() & 2) > 0) || (externalstabid != null && externalstabid == 2))  {  // PERUGIA
+		if (((usr != null && (usr.getAuthLevel() & 2) > 0) || (externalstabid != null && externalstabid == 2))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("2")))  {  // PERUGIA
 
 			ChartTable chartTable = chartsService.getChartTable(
-										2, 
+										2,
 										unitaMisura,
 										chartSessionFilter.getTxtDateFrom(),
 										chartSessionFilter.getTxtDateTo()
@@ -134,10 +138,12 @@ public class ChartsController {
 			
 		} 
 			
-		if ((usr != null && (usr.getAuthLevel() & 4) > 0) || (externalstabid != null && externalstabid == 4)) { // STRONCONE
+		if (((usr != null && (usr.getAuthLevel() & 4) > 0) || (externalstabid != null && externalstabid == 4))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("4"))) { // STRONCONE
 
 			ChartTable chartTable = chartsService.getChartTable(
-										4, 
+										4,
 										unitaMisura,
 										chartSessionFilter.getTxtDateFrom(),
 										chartSessionFilter.getTxtDateTo()
@@ -146,28 +152,30 @@ public class ChartsController {
 			chartTableList.add(chartTable);
 		} 
 		
-		/* INIZIO CANNARA */
-		
-		if ((usr != null && (usr.getAuthLevel() & 16) > 0) || (externalstabid != null && externalstabid == 16)) { 
+		/* INIZIO CANNARA - stabilimento dismesso, ora magazzino, disattivato
+
+		if ((usr != null && (usr.getAuthLevel() & 16) > 0) || (externalstabid != null && externalstabid == 16)) {
 
 			ChartTable chartTable = chartsService.getChartTable(
-										16, 
+										16,
 										unitaMisura,
 										chartSessionFilter.getTxtDateFrom(),
 										chartSessionFilter.getTxtDateTo()
-										); 
-			
+										);
+
 			chartTableList.add(chartTable);
-		} 
-		
-		/* FINE CANNARA */
+		}
+
+		FINE CANNARA */
 		
 		/* INIZIO ERBUSCO */
 		
-		if ((usr != null && (usr.getAuthLevel() & 32) > 0) || (externalstabid != null && externalstabid == 16)) { 
+		if (((usr != null && (usr.getAuthLevel() & 32) > 0) || (externalstabid != null && externalstabid == 16))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("32"))) {
 
 			ChartTable chartTable = chartsService.getChartTable(
-										32, 
+										32,
 										unitaMisura,
 										chartSessionFilter.getTxtDateFrom(),
 										chartSessionFilter.getTxtDateTo()
@@ -213,7 +221,9 @@ public class ChartsController {
 		chartSessionFilter.setUnitaMisura(unitaMisura);
 		session.setAttribute("chartSessionFilter", chartSessionFilter); 
 
-		if ((usr != null && (usr.getAuthLevel() & 1) > 0) || (externalstabid != null && externalstabid == 1)) // PONSACCO
+		if (((usr != null && (usr.getAuthLevel() & 1) > 0) || (externalstabid != null && externalstabid == 1))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("1"))) // PONSACCO
 		{
 			model.addAttribute("stabPon", 1);
 
@@ -286,7 +296,9 @@ public class ChartsController {
 		} else
 			model.addAttribute("stabPon", 0);
 
-		if ((usr != null && (usr.getAuthLevel() & 2) > 0) || (externalstabid != null && externalstabid == 2)) // PERUGIA
+		if (((usr != null && (usr.getAuthLevel() & 2) > 0) || (externalstabid != null && externalstabid == 2))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("2"))) // PERUGIA
 		{
 			model.addAttribute("stabPsg", 1);
 
@@ -360,8 +372,11 @@ public class ChartsController {
 		else
 			model.addAttribute("stabPsg", 0);
 		
-		/* INIZIO CANNARA */
-		
+		/* CANNARA - stabilimento dismesso, ora magazzino, disattivato: sempre stabCan=0 */
+		model.addAttribute("stabCan", 0);
+
+		/* INIZIO CANNARA (disattivato)
+
 		if ((usr != null && (usr.getAuthLevel() & 16) > 0) || (externalstabid != null && externalstabid == 16)) // CANNARA
 		{
 			model.addAttribute("stabCan", 1);
@@ -431,15 +446,17 @@ public class ChartsController {
 				}
 			}
 		}
-		
+
 		else
 			model.addAttribute("stabCan", 0);
-		
-		/* FINE CANNARA */
+
+		FINE CANNARA */
 		
 		/* INIZIO ERBUSCO */
 		
-		if ((usr != null && (usr.getAuthLevel() & 32) > 0) || (externalstabid != null && externalstabid == 32)) // ERBUSCO
+		if (((usr != null && (usr.getAuthLevel() & 32) > 0) || (externalstabid != null && externalstabid == 32))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("32"))) // ERBUSCO
 		{
 			model.addAttribute("stabErb", 1);
 
@@ -514,7 +531,9 @@ public class ChartsController {
 		
 		/* FINE ERBUSCO */
 
-		if ((usr != null && (usr.getAuthLevel() & 4) > 0) || (externalstabid != null && externalstabid == 4)) // STRONCONE
+		if (((usr != null && (usr.getAuthLevel() & 4) > 0) || (externalstabid != null && externalstabid == 4))
+				&& (chartSessionFilter.getStabId().equals("all") || chartSessionFilter.getStabId().equals("999")
+						|| chartSessionFilter.getStabId().contains("4"))) // STRONCONE
 		{
 			model.addAttribute("stabTer", 1);
 
