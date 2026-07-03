@@ -2,6 +2,7 @@
 target/
 *.war
 *.jar
+home/
 
 # IntelliJ IDEA
 .idea/
